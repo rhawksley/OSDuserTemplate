@@ -1,0 +1,22 @@
+kind: "Template"
+apiVersion: "v1"
+parameters:
+- name: email
+  required: true
+objects:
+- kind: "User"
+  apiVersion: "v1"
+  metadata:
+    name: "${email}"
+- kind: "Identity"
+  apiVersion: "v1"
+  metadata:
+    name: "SAML:${email}"
+  providerName: "SAML"
+  providerUserName: "${email}"
+- kind: "UserIdentityMapping"
+  apiVersion: "v1"
+  identity:
+    name: "SAML:${email}"
+  user:
+    name: "${email}"
